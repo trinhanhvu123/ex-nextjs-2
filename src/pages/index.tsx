@@ -2,10 +2,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const router = useRouter()
+
+  function goToDetailPage(){
+    router.push('/detail')
+  }
   return (
     <>
       <Head>
@@ -38,6 +46,11 @@ export default function Home() {
             </a>
           </div>
         </div>
+
+        <Link href="/about">Go to about</Link>
+        <button>
+          Go to post detail page
+        </button>
 
         <div className={styles.center}>
           <Image
