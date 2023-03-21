@@ -7,7 +7,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Alert from '@mui/material/Alert';
 
 const Notify = () =>{
-    const [state, dispatch] = useContext(DataContext)
+    const {state, dispatch} = useContext(DataContext)
     const {notify} = state
 
     return(
