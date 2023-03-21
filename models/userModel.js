@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     }, 
     avatar:{
         type: String,
-        default: ''
+        default: 'https://res.cloudinary.com/db0st5thv/image/upload/v1679379348/samples/people/smiling-man.jpg'
     }
 }, {
     timestamps: true

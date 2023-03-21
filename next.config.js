@@ -6,6 +6,6 @@ const nextConfig = {
 module.exports = {
   env:{
     "BASE_URL": "http://localhost:3000",
-    "MONGODB_URL": "mongodb+srv://anhvu62882690:anhvu123@cluster0.32xs5gb.mongodb.net/next_ecommerce?retryWrites=true&w=majority"
+    "MONGODB_URL": "mongodb+srv://anhvu6288:oRd1S2UX0bc6iYOn@cluster0.eigpmsx.mongodb.net/nextjs_ecommerce?retryWrites=true&w=majority"
   }
 }
