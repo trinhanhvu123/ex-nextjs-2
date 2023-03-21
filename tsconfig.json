@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/connectDB.js", "utils/connectDB.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/connectDB.js", "utils/connectDB.js", "src/pages/api/auth/register.js", "models/userModel.js"],
   "exclude": ["node_modules"]
 }

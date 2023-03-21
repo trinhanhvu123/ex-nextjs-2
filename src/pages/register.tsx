@@ -7,7 +7,11 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import Head from 'next/head';
+import valid from '../../utils/valid'
+import { DataContext } from '../../store/GlobalState';
+import {postData} from '../../utils/fetchData'
 
 
 const theme = createTheme();
@@ -18,19 +22,35 @@ export default function Register() {
     const [userData, setUserData] = useState(initialState)
     const {name, email, password, cf_password} = userData
 
+    const [state, dispatch] = useContext(DataContext)
+
     const handleChangeInput = (e: { target: { name: any; value: any; }; }) =>{
         const {name, value} = e.target
         setUserData({...userData, [name]: value})
+        dispatch({type:'NOTIFY', payload:{} })
     }
 
-    const handleSubmit = (e: { preventDefault: () => void; }) =>{
+    const handleSubmit = async (e: { preventDefault: () => void; }) =>{
         e.preventDefault()
-        console.log(userData)
+        const errMsg = valid(name, email, password, cf_password)
+        if(errMsg) return dispatch({type:'NOTIFY', payload:{error: errMsg} })
+
+        dispatch({type:'NOTIFY', payload:{loading: true} })
+
+        const res = await postData('auth/register', userData)
+
+        if(res.err) return dispatch({type:'NOTIFY', payload:{error: res.err}})
+        
+        return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+        // console.log(res)
     }
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
+                <Head>
+                    <title>Register page</title>
+                </Head>
                 <Box
                     sx={{
                         marginTop: 8,
@@ -89,7 +109,7 @@ export default function Register() {
                                     onChange={handleChangeInput}
                                     label="Confirm Password"
                                     type="password"
-                                    id="password"
+                                    id="cf_password"
                                     autoComplete="new-password"
                                 />
                             </Grid>
